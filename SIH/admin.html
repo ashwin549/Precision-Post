@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Admin - Add Deliveries</title>
+</head>
+<body>
+    <div class="adminContainer">
+        <h1>Add a New Delivery</h1>
+        <form onsubmit="addDelivery(); return false;">
+            <label for="recipientEmail">Recipient Email:</label>
+            <input type="email" id="recipientEmail" required><br>
+
+            <label for="sender">Sender:</label>
+            <input type="text" id="sender" required><br>
+
+            <label for="deliveryTime">Delivery Time:</label>
+            <input type="datetime-local" id="deliveryTime" required><br>
+
+            <label for="details">Delivery Details:</label>
+            <textarea id="details" required></textarea><br>
+
+            <button type="submit">Add Delivery</button>
+        </form>
+        <button onclick="goBack()">Back to Homepage</button>
+        <div id="statusMessage"></div> <!-- Ensure this element exists if you want to show status messages -->
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-firestore.js"></script>
+    <script src="admin.js"></script>
+    <script>
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

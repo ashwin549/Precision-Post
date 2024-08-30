@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Reschedule Delivery</title>
+</head>
+<body>
+    <div class="rescheduleContainer">
+        <h1>Reschedule Your Delivery</h1>
+        <p id="deliveryInfo">Loading delivery information...</p>
+
+        <form id="rescheduleForm">
+            <label for="newDate">Choose a new delivery date:</label>
+            <input type="datetime-local" id="newDate" required><br><br>
+
+            <button type="button" onclick="rescheduleDelivery()">Reschedule Delivery</button>
+        </form>
+
+        <button onclick="goBack()">Back to Homepage</button>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-firestore.js"></script>
+    <script src="reschedule.js"></script>
+    <script>
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
