@@ -35,7 +35,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import RouteMap from "./routemap";
-
+import Image from "next/image";
+import img from "../../../public/indiapost_logo_L.png";
 export const description =
   "A dashboard for visualizing and optimizing delivery routes. The dashboard includes a map integration to show routes, options for dynamic route adjustments, and ETA calculations based on current conditions.";
 
@@ -74,10 +75,11 @@ export function Deliveryroutes() {
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
             <Link
               href="/"
-              className="flex items-center gap-2 text-lg font-bold"
+              className="flex items-center align-top text-lg font-bold"
             >
-              <MapPin className="h-6 w-6" />
-              <span>PrecisionPost</span>
+              <Image src={img} height={70} width={70} alt="India Post Logo" />
+              {/* <Package2 className="h-6 w-6" /> */}
+              <span className="gap-4">PrecisionPost</span>
             </Link>
             <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
               <Bell className="h-4 w-4" />

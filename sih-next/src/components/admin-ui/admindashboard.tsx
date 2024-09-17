@@ -45,7 +45,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
+import Image from "next/image";
+import img from "../../../public/indiapost_logo_L.png";
 // Assume we have a RouteMap component that accepts a center prop
 import RouteMap from "@/components/admin-ui/routemap";
 
@@ -76,9 +77,13 @@ const Sidebar = () => (
   <div className="hidden border-r bg-muted/30 md:block">
     <div className="flex h-full flex-col gap-4">
       <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-        <Link href="/" className="flex items-center gap-2 text-lg font-bold">
-          <Package2 className="h-6 w-6" />
-          <span>PrecisionPost</span>
+        <Link
+          href="/"
+          className="flex items-center align-top text-lg font-bold"
+        >
+          <Image src={img} height={70} width={70} alt="India Post Logo" />
+          {/* <Package2 className="h-6 w-6" /> */}
+          <span className="gap-4">PrecisionPost</span>
         </Link>
         <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
           <Bell className="h-4 w-4" />
