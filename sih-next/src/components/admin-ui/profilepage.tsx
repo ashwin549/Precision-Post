@@ -71,7 +71,7 @@ export function Profilepostmendashboard() {
                 Manage Routes
               </Link>
               <Link
-                href="/admin/delivery"
+                href="/admin"
                 className="flex items-center gap-3 px-3 py-2 rounded-lg hover:text-gray-600"
               >
                 <Package className="h-4 w-4" />
@@ -92,14 +92,14 @@ export function Profilepostmendashboard() {
           <div className="mt-auto p-4">
             <Card>
               <CardHeader className="p-2">
-                <CardTitle>Feedback?</CardTitle>
+                <CardTitle>Need Help?</CardTitle>
                 <CardDescription>
-                  Provide Feedback so that we can deliver better.
+                  Contact support or provide feedback.
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-2">
                 <Button size="sm" className="w-full">
-                  Feedback
+                  Support
                 </Button>
               </CardContent>
             </Card>
@@ -118,7 +118,7 @@ export function Profilepostmendashboard() {
               <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
-                placeholder="Search products..."
+                placeholder="Search PrecisionPost..."
                 className="w-full pl-10"
               />
             </div>

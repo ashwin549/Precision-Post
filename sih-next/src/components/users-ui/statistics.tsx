@@ -12,12 +12,15 @@ import {
 } from "../ui/dialog";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import Spinner from "./spinner"; // Add a Spinner component if available
+import Spinner from "./spinner"; // Ensure Spinner component is implemented
 
 export default function Statistics() {
   const [predicting, setPredicting] = useState(false);
   const [predictions, setPredictions] = useState<string[]>([]);
+  const [selectedDate, setSelectedDate] = useState("");
   const [selectedOfficeHours, setSelectedOfficeHours] = useState("");
+  const [preferredTime, setPreferredTime] = useState("");
+  const [location, setLocation] = useState("");
 
   const officeHoursOptions = [
     "8:00 AM - 4:00 PM",
@@ -93,12 +96,18 @@ export default function Statistics() {
                     <DialogTitle>Predict Time Slots</DialogTitle>
                     <DialogDescription>
                       Enter the details below to predict the best time slots for
-                      receiving deliveries.
+                      your delivery. This will help us ensure you’re ready to
+                      receive it at the most convenient time.
                     </DialogDescription>
                   </DialogHeader>
                   <div className="flex flex-col gap-4">
                     <label className="text-sm">Date</label>
-                    <input type="date" className="p-2 border rounded" />
+                    <input
+                      type="date"
+                      value={selectedDate}
+                      onChange={(e) => setSelectedDate(e.target.value)}
+                      className="p-2 border rounded"
+                    />
 
                     <label className="text-sm">Office Hours</label>
                     <select
@@ -117,11 +126,18 @@ export default function Statistics() {
                     </select>
 
                     <label className="text-sm">Preferred Time</label>
-                    <input type="time" className="p-2 border rounded" />
+                    <input
+                      type="time"
+                      value={preferredTime}
+                      onChange={(e) => setPreferredTime(e.target.value)}
+                      className="p-2 border rounded"
+                    />
 
                     <label className="text-sm">Location</label>
                     <Input
-                      placeholder="Location"
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
+                      placeholder="Enter your location"
                       className="p-2 border rounded"
                     />
 
@@ -129,13 +145,20 @@ export default function Statistics() {
                       Predict
                     </Button>
 
-                    {predicting && <Spinner />}
+                    {predicting && (
+                      <div className="mt-4 flex items-center gap-2">
+                        <Spinner />
+                        <span>Predicting best time slots...</span>
+                      </div>
+                    )}
 
                     {predictions.length > 0 && (
                       <div className="mt-4">
                         <h3 className="text-lg font-semibold">
-                          Top 3 Predicted Time Slots:
+                          You can expect your delivery at one of the following
+                          time slots:
                         </h3>
+
                         <ul className="list-disc pl-5 mt-2">
                           {predictions.map((prediction, index) => (
                             <li key={index}>{prediction}</li>

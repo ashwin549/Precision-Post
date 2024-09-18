@@ -2,28 +2,16 @@ import Link from "next/link";
 import {
   Bell,
   CircleUser,
-  Earth,
-  Home,
   HomeIcon,
-  LineChart,
-  MapPin,
   Menu,
   Package,
   Search,
-  ShoppingCart,
   Truck,
-  Users,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,34 +25,33 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import RouteMap from "./routemap";
 import Image from "next/image";
 import img from "../../../public/indiapost_logo_L.png";
+import { ArrowRight } from "lucide-react";
+
 export const description =
   "A dashboard for visualizing and optimizing delivery routes. The dashboard includes a map integration to show routes, options for dynamic route adjustments, and ETA calculations based on current conditions.";
 
-const deliveryRoutes = [
+const deliveries = [
   {
-    id: "ROUTE001",
-    startLocation: "123 Main St",
-    endLocation: "456 Elm St",
+    id: "DEL001",
+    location: "Connaught Place, New Delhi",
+    arrivalDate: "2024-02-15",
+    expectedTimeSlot: "10:00 AM - 12:00 PM",
     ecoFriendly: true,
     priorityDelivery: false,
-    eta: "30 minutes",
+    status: "pending",
+    deliveryTime: null,
   },
   {
-    id: "ROUTE002",
-    startLocation: "456 Elm St",
-    endLocation: "789 Oak St",
+    id: "DEL002",
+    location: "Lajpat Nagar, New Delhi",
+    arrivalDate: "2024-02-15",
+    expectedTimeSlot: "1:00 PM - 3:00 PM",
     ecoFriendly: false,
     priorityDelivery: true,
-    eta: "45 minutes",
+    status: "pending",
+    deliveryTime: null,
   },
-  {
-    id: "ROUTE003",
-    startLocation: "789 Oak St",
-    endLocation: "123 Main St",
-    ecoFriendly: true,
-    priorityDelivery: false,
-    eta: "50 minutes",
-  },
+  // Add more delivery objects as needed
 ];
 
 export function Deliveryroutes() {
@@ -78,7 +65,6 @@ export function Deliveryroutes() {
               className="flex items-center align-top text-lg font-bold"
             >
               <Image src={img} height={70} width={70} alt="India Post Logo" />
-              {/* <Package2 className="h-6 w-6" /> */}
               <span className="gap-4">PrecisionPost</span>
             </Link>
             <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
@@ -106,7 +92,7 @@ export function Deliveryroutes() {
             </Link>
             <Link
               href="/admin/profile"
-              className="flex items-center gap-3 px-3 py-2 bg-muted/40 rounded-lg text-primary hover:text-gray-600"
+              className="flex items-center gap-3 px-3 py-2  rounded-lg  hover:text-gray-600"
             >
               <HomeIcon className="h-4 w-4" />
               Your Profile
@@ -115,14 +101,14 @@ export function Deliveryroutes() {
           <div className="mt-auto p-4">
             <Card>
               <CardHeader className="p-2">
-                <CardTitle>Feedback?</CardTitle>
+                <CardTitle>Need Help?</CardTitle>
                 <CardDescription>
-                  Provide Feedback so that we can deliver better.
+                  Contact support or provide feedback.
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-2">
                 <Button size="sm" className="w-full">
-                  Feedback
+                  Support
                 </Button>
               </CardContent>
             </Card>
@@ -141,7 +127,7 @@ export function Deliveryroutes() {
               <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
-                placeholder="Search routes..."
+                placeholder="Search PrecisionPost..."
                 className="w-full pl-10"
               />
             </div>
@@ -163,67 +149,79 @@ export function Deliveryroutes() {
           </DropdownMenu>
         </header>
 
-        {/* Route Map and Routes Section */}
+        {/* Route Map and Deliveries Section */}
         <main className="p-4">
           <div className="flex flex-col gap-2">
             <div className="flex justify-between items-center">
-              <h1 className="text-lg font-bold">Best Routes for Today</h1>
+              <h1 className="text-lg font-bold">Delivery Schedule for Today</h1>
             </div>
             <RouteMap />
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {deliveryRoutes.length > 0 ? (
-                deliveryRoutes.map((route) => (
-                  <Card
-                    key={route.id}
-                    className="p-4 shadow-sm hover:shadow-md transition-shadow"
+              {deliveries.length > 0 ? (
+                deliveries.map((delivery, index) => (
+                  <div
+                    key={delivery.id}
+                    className="relative p-4 shadow-sm hover:shadow-md transition-shadow"
                   >
-                    <CardHeader>
-                      <CardTitle className="text-lg font-semibold">
-                        Route {route.id}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex flex-col gap-2">
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium">Start Location:</span>
-                        <span>{route.startLocation}</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium">End Location:</span>
-                        <span>{route.endLocation}</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium">ETA:</span>
-                        <span>{route.eta}</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium">Eco-Friendly:</span>
-                        <Badge
-                          variant={route.ecoFriendly ? "secondary" : "default"}
-                        >
-                          {route.ecoFriendly ? "Yes" : "No"}
-                        </Badge>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium">Priority:</span>
-                        <Badge
-                          variant={
-                            route.priorityDelivery ? "destructive" : "default"
-                          }
-                        >
-                          {route.priorityDelivery ? "High" : "Normal"}
-                        </Badge>
-                      </div>
-                      <Button variant="outline" className="mt-2">
-                        Modify Route
-                      </Button>
-                    </CardContent>
-                  </Card>
+                    <Card className="relative">
+                      <CardHeader>
+                        <CardTitle className="text-lg font-semibold">
+                          Delivery {delivery.id}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="flex flex-col gap-2">
+                        <div className="flex items-center justify-between">
+                          <span className="font-medium">Location:</span>
+                          <span>{delivery.location}</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="font-medium">Arrival Date:</span>
+                          <span>{delivery.arrivalDate}</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="font-medium">Time Slot:</span>
+                          <span>{delivery.expectedTimeSlot}</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="font-medium">Eco-Friendly:</span>
+                          <Badge
+                            variant={
+                              delivery.ecoFriendly ? "secondary" : "default"
+                            }
+                          >
+                            {delivery.ecoFriendly ? "Yes" : "No"}
+                          </Badge>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="font-medium">Priority:</span>
+                          <Badge
+                            variant={
+                              delivery.priorityDelivery
+                                ? "destructive"
+                                : "default"
+                            }
+                          >
+                            {delivery.priorityDelivery ? "High" : "Normal"}
+                          </Badge>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="font-medium">Status:</span>
+                          <span>{delivery.status}</span>
+                        </div>
+                        <Button variant="outline" className="mt-2">
+                          Mark as Completed
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </div>
                 ))
               ) : (
                 <div className="flex flex-col items-center text-center">
-                  <h3 className="text-2xl font-bold">No Routes Available</h3>
+                  <h3 className="text-2xl font-bold">
+                    No Deliveries Scheduled
+                  </h3>
                   <p className="text-sm text-muted-foreground">
-                    You will be notified as soon as routes are scheduled.
+                    You will be notified as soon as deliveries are scheduled.
                   </p>
                 </div>
               )}

@@ -7,7 +7,7 @@ import img from "../../../public/IMG-20240724-WA0023.jpg";
 
 export default function ProfilePostmen() {
   const [name, setName] = useState("Keerthan Kumar C");
-  const [location, setLocation] = useState("Manipal, Udupi-576104");
+  const [location, setLocation] = useState("Saket, New Delhi");
   const [phoneNumber, setPhoneNumber] = useState("+91 9591124158");
   const [rating, setRating] = useState("4.7/5");
   const [completedDeliveries, setCompletedDeliveries] = useState(120);
@@ -30,7 +30,7 @@ export default function ProfilePostmen() {
       </div>
 
       {/* Lower Rectangle */}
-      <Card className="mt-6">
+      <Card className="mt-10">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">Statistics</CardTitle>
         </CardHeader>

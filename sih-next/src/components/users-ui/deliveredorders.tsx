@@ -39,40 +39,40 @@ export const description =
 
 const deliveries = [
   {
-    id: "DEL001",
-    location: "123 Main St",
-    DeliveredDate: "2024-02-15",
-    PredictedTimeSlot: "10:00 AM - 12:00 PM",
+    id: "DEL004",
+    location: "45 Connaught Place, Delhi",
+    DeliveredDate: "2024-03-10",
+    PredictedTimeSlot: "9:00 AM - 11:00 AM",
     ChangedTimeSlot: "",
-    DeliveredTimeSlot: "12:00 PM",
+    DeliveredTimeSlot: "10:00 AM",
     ecoFriendly: true,
     priorityDelivery: false,
     Delayed: "No",
   },
   {
-    id: "DEL002",
-    location: "456 Elm St",
-    DeliveredDate: "2024-02-16",
-    PredictedTimeSlot: "2:00 PM - 4:00 PM",
-    ChangedTimeSlot: "3:00 PM - 5:00 PM",
-    DeliveredTimeSlot: "4:00 PM",
+    id: "DEL005",
+    location: "78 Chandni Chowk, Delhi",
+    DeliveredDate: "2024-03-11",
+    PredictedTimeSlot: "1:00 PM - 3:00 PM",
+    ChangedTimeSlot: "2:00 PM - 4:00 PM",
+    DeliveredTimeSlot: "3:00 PM",
     ecoFriendly: false,
     priorityDelivery: true,
     Delayed: "Yes",
   },
   {
-    id: "DEL003",
-    location: "789 Oak St",
-    DeliveredDate: "2024-02-17",
-    PredictedTimeSlot: "11:00 AM - 1:00 PM",
+    id: "DEL006",
+    location: "102 South Extension, Delhi",
+    DeliveredDate: "2024-03-12",
+    PredictedTimeSlot: "12:00 PM - 2:00 PM",
     ChangedTimeSlot: "",
-    DeliveredTimeSlot: "12:00 PM",
+    DeliveredTimeSlot: "1:00 PM",
     ecoFriendly: true,
     priorityDelivery: false,
     Delayed: "No",
   },
-
 ];
+
 export function DeliveredOrdersDashboard() {
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
@@ -163,7 +163,7 @@ export function DeliveredOrdersDashboard() {
               <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
-                placeholder="Search products..."
+                placeholder="Search PrecisionPost..."
                 className="w-full pl-10"
               />
             </div>

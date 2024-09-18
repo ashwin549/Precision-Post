@@ -1,15 +1,19 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import image from '../../../sih-next/public/ai-generated-8793863_1280.jpg';
+import Image from "next/image";
+import img from "../../public/indiapost_logo_L.png";
 export function LoginPage() {
   return (
     <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
+          <div className="w-full flex items-center justify-center">
+            <Image src={img} height={80} width={80} alt="India Post Logo" />
+          </div>
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold">PrecisionPost</h1>
             <p className="text-balance text-muted-foreground">
@@ -22,7 +26,7 @@ export function LoginPage() {
               <Input
                 id="email"
                 type="email"
-                placeholder="m@example.com"
+                placeholder="india@example.com"
                 required
               />
             </div>

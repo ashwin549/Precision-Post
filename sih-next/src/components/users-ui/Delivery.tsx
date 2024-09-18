@@ -12,6 +12,12 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Switch } from "@/components/ui/switch";
 import { Loader2 } from "lucide-react";
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 
 export interface DeliveryProps {
   id: string;
@@ -32,19 +38,18 @@ export default function Delivery({
 }: DeliveryProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [timeSlots, setTimeSlots] = useState<string[]>([]);
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(
+    initialExpectedTimeSlot
+  );
   const [ecoFriendly, setEcoFriendly] = useState(initialEcoFriendly);
   const [priorityDelivery, setPriorityDelivery] = useState(
     initialPriorityDelivery
-  );
-  const [expectedTimeSlot, setExpectedTimeSlot] = useState(
-    initialExpectedTimeSlot
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const predictBestTimes = () => {
     setIsLoading(true);
-    // Simulating API call
+    // Simulating API call for predicting time slots based on user history and preferences
     setTimeout(() => {
       let predictedSlots;
       if (ecoFriendly) {
@@ -86,41 +91,9 @@ export default function Delivery({
   };
 
   const handleSaveChanges = () => {
-    if (selectedTimeSlot) {
-      setExpectedTimeSlot(selectedTimeSlot);
-    }
     setIsModalOpen(false);
-    // Here you would typically send the updated data to your backend
+    // Simulate saving the updated time slot to the backend
   };
-
-  const renderTimeSlotSelection = () => (
-    <>
-      <Button onClick={predictBestTimes} disabled={isLoading}>
-        {isLoading ? (
-          <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            AI MODEL Predicting best times...
-          </>
-        ) : (
-          "Predict best times for you"
-        )}
-      </Button>
-      {timeSlots.length > 0 && (
-        <RadioGroup
-          className="mt-4"
-          value={selectedTimeSlot}
-          onValueChange={setSelectedTimeSlot}
-        >
-          {timeSlots.map((slot, index) => (
-            <div key={index} className="flex items-center space-x-2">
-              <RadioGroupItem value={slot} id={`slot-${index}`} />
-              <Label htmlFor={`slot-${index}`}>{slot}</Label>
-            </div>
-          ))}
-        </RadioGroup>
-      )}
-    </>
-  );
 
   return (
     <Card className="mb-4 shadow-md">
@@ -137,7 +110,7 @@ export default function Delivery({
           </div>
           <div className="flex justify-between items-center text-sm">
             <span className="text-muted-foreground">Expected Time Slot:</span>
-            <span className="font-medium">{expectedTimeSlot}</span>
+            <span className="font-medium">{selectedTimeSlot}</span>
           </div>
           <div className="flex justify-between items-center text-sm">
             <span className="text-muted-foreground">Eco-Friendly:</span>
@@ -164,18 +137,18 @@ export default function Delivery({
       <CardContent className="pt-4">
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           <DialogTrigger asChild>
-            <Button variant="outline" size="sm" className="w-full">
-              View Order Details
+            <Button variant="default" size="sm" className="w-full">
+              Manage Delivery Preferences
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[900px]">
             <DialogHeader>
-              <DialogTitle>Order Details</DialogTitle>
+              <DialogTitle>Manage Your Delivery</DialogTitle>
             </DialogHeader>
             <div className="grid grid-cols-2 gap-4">
               <Card>
                 <CardHeader>
-                  <CardTitle>Order Information</CardTitle>
+                  <CardTitle>Delivery Information</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
@@ -193,7 +166,7 @@ export default function Delivery({
                     </div>
                     <div>
                       <Label>Current Time Slot:</Label>
-                      <p>{expectedTimeSlot}</p>
+                      <p>{selectedTimeSlot}</p>
                     </div>
                     <div className="flex items-center justify-between">
                       <Label htmlFor="eco-friendly">
@@ -206,9 +179,10 @@ export default function Delivery({
                       />
                     </div>
                     {ecoFriendly && (
-                      <p className="text-sm text-muted-foreground">
-                        Note: Eco-friendly delivery may extend delivery time to
-                        reduce carbon footprint.
+                      <p className="text-sm text-green-500">
+                        Thank you for choosing the eco-friendly option. By doing
+                        this, you're helping to reduce our carbon footprint and
+                        making a positive impact on the environment.
                       </p>
                     )}
                     <div className="flex items-center justify-between">
@@ -223,8 +197,8 @@ export default function Delivery({
                     </div>
                     {priorityDelivery && (
                       <p className="text-sm text-muted-foreground">
-                        Note: Priority delivery incurs additional charges for
-                        faster service.
+                        Your priority is our foremost concern. We will deliver
+                        as quickly as possible to meet your schedule.
                       </p>
                     )}
                   </div>
@@ -232,53 +206,82 @@ export default function Delivery({
               </Card>
               <Card>
                 <CardHeader>
-                  <CardTitle>Time Slot Selection</CardTitle>
+                  <CardTitle>Select Preferred Time</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {ecoFriendly ? (
-                    <div className="space-y-4">
-                      <p className="text-sm text-muted-foreground">
-                        Eco-friendly delivery times are optimized to reduce
-                        carbon footprint. This may result in slightly longer
-                        delivery times.
-                      </p>
-                      {renderTimeSlotSelection()}
-                    </div>
-                  ) : priorityDelivery ? (
-                    <div className="space-y-4">
-                      <p className="text-sm text-muted-foreground">
-                        Priority delivery offers faster delivery times at an
-                        additional cost.
-                      </p>
-                      {renderTimeSlotSelection()}
-                    </div>
-                  ) : (
-                    <div className="space-y-4">
-                      <p className="text-sm text-muted-foreground">
-                        Select a delivery option or predict the best times for
-                        standard delivery.
-                      </p>
-                      {renderTimeSlotSelection()}
-                    </div>
-                  )}
+                  <div className="space-y-4">
+                    <p className="text-sm text-muted-foreground">
+                      You can manually select a preferred time slot or let us
+                      predict the best times for you to pickup delivery using
+                      AI.
+                    </p>
+                    <Select
+                      value={selectedTimeSlot}
+                      onValueChange={setSelectedTimeSlot}
+                    >
+                      <SelectTrigger>Select a Time Slot</SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="9:00 AM - 10:00 AM">
+                          9:00 AM - 10:00 AM
+                        </SelectItem>
+                        <SelectItem value="10:00 AM - 11:00 AM">
+                          10:00 AM - 11:00 AM
+                        </SelectItem>
+                        <SelectItem value="11:00 AM - 12:00 PM">
+                          11:00 AM - 12:00 PM
+                        </SelectItem>
+                        <SelectItem value="1:00 PM - 2:00 PM">
+                          1:00 PM - 2:00 PM
+                        </SelectItem>
+                        <SelectItem value="2:00 PM - 3:00 PM">
+                          2:00 PM - 3:00 PM
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Button onClick={predictBestTimes} disabled={isLoading}>
+                      <Button
+                        onClick={predictBestTimes}
+                        disabled={isLoading}
+                        className="flex items-center"
+                      >
+                        {isLoading ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            {ecoFriendly
+                              ? "Minimizing Carbon Footprint..."
+                              : priorityDelivery
+                              ? "Fastest Delivery for Priority Service..."
+                              : "Predicting Optimal Time..."}
+                          </>
+                        ) : (
+                          "Predict Best Time Based on Your Preferences"
+                        )}
+                      </Button>
+                    </Button>
+                    {timeSlots.length > 0 && (
+                      <RadioGroup
+                        className="mt-4"
+                        value={selectedTimeSlot}
+                        onValueChange={setSelectedTimeSlot}
+                      >
+                        {timeSlots.map((slot, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center space-x-2"
+                          >
+                            <RadioGroupItem value={slot} id={`slot-${index}`} />
+                            <Label htmlFor={`slot-${index}`}>{slot}</Label>
+                          </div>
+                        ))}
+                      </RadioGroup>
+                    )}
+                  </div>
                 </CardContent>
               </Card>
             </div>
-            <div className="mt-4 flex justify-end space-x-2">
-              <Button variant="outline" onClick={() => setIsModalOpen(false)}>
-                Cancel
-              </Button>
-              <Button
-                onClick={handleSaveChanges}
-                disabled={
-                  !selectedTimeSlot &&
-                  ecoFriendly === initialEcoFriendly &&
-                  priorityDelivery === initialPriorityDelivery
-                }
-              >
-                Save Changes
-              </Button>
-            </div>
+            <Button onClick={handleSaveChanges} className="mt-4">
+              Save Changes
+            </Button>
           </DialogContent>
         </Dialog>
       </CardContent>

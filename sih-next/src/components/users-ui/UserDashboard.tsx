@@ -38,10 +38,10 @@ import img from "../../../public/indiapost_logo_L.png"
 export const description =
   "A products dashboard with a sidebar navigation and a main content area. The dashboard has a header with a search input and a user menu. The sidebar has a logo, navigation links, and a card with a call to action. The main content area shows an empty state with a call to action.";
 
-const deliveries= [
+const deliveries = [
   {
     id: "DEL001",
-    location: "123 Main St",
+    location: "Connaught Place, New Delhi",
     arrivalDate: "2024-02-15",
     expectedTimeSlot: "10:00 AM - 12:00 PM",
     ecoFriendly: true,
@@ -49,7 +49,7 @@ const deliveries= [
   },
   {
     id: "DEL002",
-    location: "456 Elm St",
+    location: "Khan Market, New Delhi",
     arrivalDate: "2024-02-16",
     expectedTimeSlot: "2:00 PM - 4:00 PM",
     ecoFriendly: false,
@@ -57,13 +57,14 @@ const deliveries= [
   },
   {
     id: "DEL003",
-    location: "789 Oak St",
+    location: "Hauz Khas, New Delhi",
     arrivalDate: "2024-02-17",
     expectedTimeSlot: "11:00 AM - 1:00 PM",
     ecoFriendly: true,
     priorityDelivery: false,
   },
 ];
+
 export function Dashboard() {
     const [darkMode, setDarkMode] = useState(false);
 
@@ -103,7 +104,7 @@ export function Dashboard() {
               </Link>
               <Link
                 href="/users/expected"
-                className="flex items-center gap-3 px-3 py-2 rounded-lg hover:text-primary"
+                className="flex items-center gap-3 px-3 py-2 rounded-lg bg-muted/40 hover:text-gray-600  text-primary"
               >
                 <ShoppingCart className="h-4 w-4" />
                 Expected Deliveries
@@ -113,7 +114,7 @@ export function Dashboard() {
               </Link>
               <Link
                 href="/users/delivered"
-                className="flex items-center gap-3 px-3 py-2 bg-muted/40 rounded-lg text-primary hover:text-gray-600"
+                className="flex items-center gap-3 px-3 py-2  rounded-lg  hover:text-gray-600"
               >
                 <Package className="h-4 w-4" />
                 Delivered Orders
@@ -163,7 +164,7 @@ export function Dashboard() {
               <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
-                placeholder="Search products..."
+                placeholder="Search PrecisionPost..."
                 className="w-full pl-10"
               />
             </div>

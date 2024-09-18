@@ -17,10 +17,10 @@ export default function Profile() {
   const [name, setName] = useState("Keerthan Kumar C");
   const [officeHours, setOfficeHours] = useState("9am - 5pm");
   const [description, setDescription] = useState(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    "I am a dedicated software engineer with a passion for developing innovative solutions."
   );
-  const [address, setAddress] = useState("MIT Quaterse");
-  const [location, setLocation] = useState("Manipal, Udupi-576104");
+  const [address, setAddress] = useState("Saket, New Delhi");
+  const [location, setLocation] = useState("Delhi, India");
   const [country, setCountry] = useState("India");
   const [phoneNumber, setPhoneNumber] = useState("+91 9591124158");
 
@@ -51,7 +51,7 @@ export default function Profile() {
   );
 
   return (
-    <section className="bg-white rounded-lg shadow-lg  w-full ">
+    <section className="bg-white rounded-lg shadow-lg w-full">
       <div className="flex flex-row items-center gap-10">
         {/* Profile Image */}
         <div className="w-25% h-25% p-2 rounded-full overflow-hidden">
@@ -66,7 +66,9 @@ export default function Profile() {
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-lg text-muted-foreground mt-2">Full Name</p>
+                <p className="text-lg text-muted-foreground mt-2">
+                  Full Name: {name}
+                </p>
                 {editField("Name", name, setName)}
               </div>
 

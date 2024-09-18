@@ -100,7 +100,7 @@ const Sidebar = () => (
         </Link>
         <Link
           href="/admin/delivery"
-          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:text-gray-600"
+          className="flex items-center gap-3 px-3 py-2 rounded-lg bg-muted/40 hover:text-gray-600  text-primary"
         >
           <Package className="h-4 w-4" />
           Delivery Overview
@@ -110,7 +110,7 @@ const Sidebar = () => (
         </Link>
         <Link
           href="/admin/profile"
-          className="flex items-center gap-3 px-3 py-2 bg-muted/40 rounded-lg text-primary hover:text-gray-600"
+          className="flex items-center gap-3 px-3 py-2  rounded-lg hover:text-gray-600"
         >
           <HomeIcon className="h-4 w-4" />
           Your Profile
@@ -145,7 +145,7 @@ const Header = () => (
         <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
         <Input
           type="search"
-          placeholder="Search deliveries..."
+          placeholder="Search PrecisionPost..."
           className="w-full pl-10"
         />
       </div>
@@ -259,13 +259,13 @@ const DeliveryCard = ({
         >
           Out for Delivery
         </Button>
-        <Button
+        {/* <Button
           className="w-full mt-2"
           variant={"link"}
           onClick={() => onPredictBestTime(delivery.id)}
         >
           Predict Best Time Slot
-        </Button>
+        </Button> */}
         <Button className="w-full mt-2" variant={"link"}>
           <Link href="/admin/delivery">View Best Routes</Link>
         </Button>
@@ -346,7 +346,7 @@ export function Postmandashboard() {
         <main className="p-4">
           <div className="flex justify-between items-center mb-4">
             <h1 className="text-lg font-bold">
-              Your Deliveries for Today in Order
+              Your Deliveries for Today in Optimized Order
             </h1>
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
