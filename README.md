@@ -1,8 +1,8 @@
-Website link: precisionpost.web.app
+## Website link: [precisionpost.web.app](precisionpost.web.app)
 
-Signin page: index.html, run it to enter website
+## Signin page: index.html, run it to enter website
 
-Admin access:
+## Admin access:
 Signin normally as:
 ashwinshetty549@gmail.com
 SIHpassword
